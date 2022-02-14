@@ -1,0 +1,3 @@
+DROP DATABASE IF EXISTS dbCompany;
+CREATE DATABASE dbCompany;
+USE dbCompany;
