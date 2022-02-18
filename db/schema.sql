@@ -11,3 +11,10 @@ CREATE TABLE employee (
     FOREIGN KEY (role_id) REFERENCES roles(id) ON DELETE CASCADE
 );
 
+CREATE TABLE roles (
+
+);
+
+CREATE TABLE department (
+
+);
