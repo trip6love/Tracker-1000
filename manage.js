@@ -70,3 +70,34 @@ const viewEmployees = function () {
         Menu();
     });
 };
+
+const addEmployee = function () {
+    db.query(`SELECT * FROM roles`, (err, rows) => {
+        if (err) {
+            throw err;
+            Menu();
+        }
+        const roles = rows.map(role => {
+            return {
+                name: role.title,
+                value: role.id
+            }
+        })
+        db.query(`SELECT * FROM employee`, (err, rows) => {
+            if (err) {
+                throw err;
+                Menu();
+            }
+            const employees = rows.map(employee => {
+                return {
+                    name: employee.first_name + ' ' + employee.last_name,
+                    value: employee.id
+                }
+            })
+            inquirer
+                .prompt([{
+                    
+                }])
+        })
+    })
+}
