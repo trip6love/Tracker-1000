@@ -1,7 +1,7 @@
 const inquirer = require('inquirer');
 const { Table } = require('console.table');
 const db = require('./db/connect');
-const { start } = require('repl');
+//const { start } = require('repl');//
 
 db.connect(err => {
     if (err) throw err;
@@ -33,4 +33,40 @@ const start = function () {
                 updateEmployee();
             }
         });
+};
+
+const viewRoles = function () {
+    const sql = `SELECT * FROM roles`
+    db.query(sql, (err, rows) => {
+        if (err) {
+            throw err;
+            Menu();
+        }
+        Table(rows);
+        Menu();
+    });
+};
+
+const viewDepartments = function () {
+    const sql = `SELECT * FROM departments`
+    db.query(sql, (err, rows) => {
+        if (err) {
+            throw err;
+            Menu();
+        }
+        Table(rows);
+        Menu();
+    });
+};
+
+const viewEmployees = function () {
+    const sql = `SELECT * FROM employees`
+    db.query(sql, (err, rows) => {
+        if (err) {
+            throw err;
+            Menu();
+        }
+        Table(rows);
+        Menu();
+    });
 };
