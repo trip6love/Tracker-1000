@@ -96,8 +96,29 @@ const addEmployee = function () {
             })
             inquirer
                 .prompt([{
-                    
+                    type: 'text',
+                    name: 'firstName',
+                    message: "Please give a first name for the employee!"
+                },
+                {
+                    type: 'text',
+                    name: 'lastName',
+                    message: "Please give a last name for the employee!"
+                },
+                {
+                    type: 'list',
+                    name: 'role',
+                    message: "What is the role?",
+                    choices: roles
+                },
+                {
+                    type: 'list',
+                    name: 'manager',
+                    message: "Employee's manager?",
+                    choices: employees
+
                 }])
+                
         })
     })
 }
