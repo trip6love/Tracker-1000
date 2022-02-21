@@ -118,7 +118,22 @@ const addEmployee = function () {
                     choices: employees
 
                 }])
+                .then(response => {
+                    const sql = `INSERT INTO employee (first_name, last_name, role_id, manager_id) VALUES (?, ?, ?, ?)`;
+                    const par = [response.firstName, response.lastName, response.role, response.manager];
+                    db.query(sql, par, (err, result) => {
+                        if (err) {
+                            throw err;
+                        }
+                        console.log(`Added employee success!`)
+                        viewEmployees();
+                    });
+                });
                 
-        })
-    })
+        });
+    });
+};
+
+const addRole = function () {
+    
 }
