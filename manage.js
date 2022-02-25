@@ -135,5 +135,27 @@ const addEmployee = function () {
 };
 
 const addRole = function () {
-    
+    db.query('SELECT * FROM department', (err, rows) => {
+        if (err) {
+            throw err;
+        }
+        const departments = rows.map(department => {
+            return {
+                name: department.name,
+                value: department.id
+            }
+        })
+        inquirer
+            .prompt([{
+                type: 'text',
+                name: 'salary',
+                message: 'Title of role?'
+            },
+            {
+
+            },
+            {
+
+            }])
+    })
 }
