@@ -28,10 +28,8 @@ const start = function () {
             } else if (response.Menu === 'Add Role') {
                 addRole();
             } else if (response.Menu === 'Add Department') {
-                addDepartment();
-            } else if (response.Menu === 'Update Employee') {
-                updateEmployee();
-            }
+                addDep();
+            } 
         });
 };
 
@@ -40,7 +38,7 @@ const viewRoles = function () {
     db.query(sql, (err, rows) => {
         if (err) {
             throw err;
-            Menu();
+            
         }
         Table(rows);
         Menu();
@@ -52,7 +50,7 @@ const viewDepartments = function () {
     db.query(sql, (err, rows) => {
         if (err) {
             throw err;
-            Menu();
+            
         }
         Table(rows);
         Menu();
@@ -64,7 +62,7 @@ const viewEmployees = function () {
     db.query(sql, (err, rows) => {
         if (err) {
             throw err;
-            Menu();
+          
         }
         Table(rows);
         Menu();
@@ -86,7 +84,7 @@ const addEmployee = function () {
         db.query(`SELECT * FROM employee`, (err, rows) => {
             if (err) {
                 throw err;
-                Menu();
+                
             }
             const employees = rows.map(employee => {
                 return {
@@ -173,4 +171,24 @@ const addRole = function () {
                 viewRoles();
             })
     })
+}
+
+const addDep = function () {
+    inquirer
+        .prompt({
+            type: 'text',
+            name: 'depName',
+            message: 'what is the new department?'
+        })
+        .then(response => {
+            const sql = `INSERT INTO department (name) VALUES (?)`;
+            const params = response.depName;
+            db.query(sql, params, (err, result) => {
+                if (err) {
+                    throw err;
+                    
+                }
+                viewDepartments();
+            })
+        })
 }
