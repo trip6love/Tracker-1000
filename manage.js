@@ -7,14 +7,14 @@ db.connect(err => {
     if (err) throw err;
     start();
 });
-
+// START MENU //
 const start = function () {
     inquirer
         .prompt({
             type: 'list',
             name: 'Menu',
             message: 'From the list, choose what to do!',
-            choices: ['View Roles', 'View Departments', 'View Employees', 'Add Employee', ' Update an Employee', 'Add Role', 'Add Department']
+            choices: ['View Roles', 'View Departments', 'View Employees', 'Add Employee', 'Add Role', 'Add Department']
         })
         .then(response => {
             if (response.Menu === 'View Roles') {
@@ -32,7 +32,7 @@ const start = function () {
             } 
         });
 };
-
+// VIEW EMPLOYEE ROLES //
 const viewRoles = function () {
     const sql = `SELECT * FROM roles`
     db.query(sql, (err, rows) => {
@@ -44,7 +44,7 @@ const viewRoles = function () {
         Menu();
     });
 };
-
+// VIEW THE DEPARTMENTS//
 const viewDepartments = function () {
     const sql = `SELECT * FROM departments`
     db.query(sql, (err, rows) => {
@@ -56,7 +56,7 @@ const viewDepartments = function () {
         Menu();
     });
 };
-
+//VIEW EMPLOYEES //
 const viewEmployees = function () {
     const sql = `SELECT * FROM employees`
     db.query(sql, (err, rows) => {
@@ -68,7 +68,7 @@ const viewEmployees = function () {
         Menu();
     });
 };
-
+// ADDING EMPLOYEES //
 const addEmployee = function () {
     db.query(`SELECT * FROM roles`, (err, rows) => {
         if (err) {
@@ -92,6 +92,7 @@ const addEmployee = function () {
                     value: employee.id
                 }
             })
+            // ADD QUESTIONS  FOR ADDING EMPLOYEE //
             inquirer
                 .prompt([{
                     type: 'text',
@@ -131,7 +132,7 @@ const addEmployee = function () {
         });
     });
 };
-
+// ADD ROLE FUNCTION //
 const addRole = function () {
     db.query('SELECT * FROM department', (err, rows) => {
         if (err) {
@@ -172,7 +173,7 @@ const addRole = function () {
             })
     })
 }
-
+// ADD DEPARTMENTS //
 const addDep = function () {
     inquirer
         .prompt({
