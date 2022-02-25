@@ -148,14 +148,29 @@ const addRole = function () {
         inquirer
             .prompt([{
                 type: 'text',
-                name: 'salary',
+                name: 'title',
                 message: 'Title of role?'
             },
             {
-
+                type: 'text',
+                name: 'salary',
+                message: 'Salary of the role?'
             },
             {
-
+                type: 'list',
+                name: 'department',
+                message: 'what department is this role under?',
+                choices: departments
             }])
+            .then(response => {
+                const sql = `INSERT INTO roles (title, salary, department_id) VALUES (?, ?, ?)`;
+                const params = [response.title, response.salary, response.department];
+                db.query(sql, params, (err, rows) => {
+                    if (err) {
+                        throw err;
+                    }
+                })
+                viewRoles();
+            })
     })
 }
